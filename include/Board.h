@@ -15,7 +15,7 @@ public:
 	int getHeigth() const;
 	int getWidth() const;
 	void createGameObject(int row, int col, enum ObjectType type);
-	void saveToFile(std::ofstream file);
+	void saveToFile(std::ofstream& file);
 	GameObject& operator()(int row, int col);
 	GameObject& operator()(sf::Vector2f coords);
 	void draw(sf::RenderWindow& window);

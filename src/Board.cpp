@@ -28,6 +28,18 @@ void Board::createGameObject(int row, int col, enum ObjectType type)
     m_board[row][col] = GameObject(type);
 }
 
+void Board::saveToFile(std::ofstream& out)
+{
+    for (int rowIndex = 0; rowIndex < getHeigth(); rowIndex++)
+    {
+        for (int colIndex = 0; colIndex < getWidth(); colIndex++)
+        {
+            out << m_board[rowIndex][colIndex].getObjectType();
+        }
+        out << std::endl;
+    }
+}
+
 std::vector<std::string>& Board::fileToString(std::ifstream& file)
 {
     std::string line;

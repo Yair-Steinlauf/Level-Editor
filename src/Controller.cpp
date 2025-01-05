@@ -53,11 +53,12 @@ void Controller::handelClick(sf::Vector2f location)
 	}
 	switch (m_current.getObjectType())
 	{
-	case SAVE: //TODO: save to file func-- use save to file of board
+	case SAVE: saveToFile("Board.txt"); //TODO: save to file func-- use save to file of board
 		break;
 	case DELETE: m_board(location) = GameObject(EMPTY);
 		break;
-	case NEWPAGE: // TODO: m_board.setToDefualt()
+
+	case NEWPAGE: m_board = Board(m_board.getHeigth(), m_board.getWidth());
 		break;
 	default: //TODO: add special beavior for ROBOT and DOOR 
 		m_board(location) = m_current;
@@ -65,6 +66,15 @@ void Controller::handelClick(sf::Vector2f location)
 	}
 }
 
+
+void Controller::saveToFile(std::string fileName)
+{
+	auto outPut = std::ofstream(fileName);
+	if (outPut.is_open())
+	{
+		m_board.saveToFile(outPut);
+	}
+}
 
 Board Controller::loadFromFile(std::string fileName)
 {

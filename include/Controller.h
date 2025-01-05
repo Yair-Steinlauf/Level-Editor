@@ -12,6 +12,7 @@ public:
 private:
 	void handelClick(sf::Vector2f location);
 	void draw(sf::RenderWindow& window);
+	void saveToFile(std::string fileName);
 	Board loadFromFile(std::string fileName);
 	Board m_board;
 	Menu m_menu;
