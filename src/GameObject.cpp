@@ -11,7 +11,7 @@ void GameObject::draw(sf::RenderWindow& window, sf::Vector2f& location, sf::Vect
 	auto sprite = sf::Sprite();
 	sprite.setPosition(location);
 	sprite.setTexture(*m_texture);
-	sprite.setScale(size);//TODO: understand how to change pic size
+	sprite.setScale(size);
 	window.draw(sprite);
 }
 
@@ -20,13 +20,6 @@ ObjectType GameObject::getObjectType()
 	return m_type;
 }
 
-bool GameObject::contain(sf::Vector2f coords,sf::Vector2f& location, sf::Vector2f& size)
-{
-	auto sprite = sf::Sprite();
-	sprite.setPosition(location);
-	sprite.setTexture(*m_texture);
-	sprite.setScale(size);//TODO: understand how to change pic size
-	auto boundingRec = sprite.getLocalBounds();
-	return boundingRec.contains(coords);
-}
+
+
 

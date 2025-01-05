@@ -15,7 +15,6 @@ public:
 	GameObject operator()(sf::Vector2f coords);
 private:
 	std::string loadFromFile(std::string fileName);
-	ObjectType getObjectAtLocation(const sf::Vector2f& coordinates) const;
 	std::vector<GameObject> m_buttoms;
 
 };

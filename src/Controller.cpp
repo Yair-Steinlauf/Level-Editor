@@ -56,17 +56,14 @@ void Controller::handelClick(sf::Vector2f location)
 	}
 	switch (m_current.getObjectType())
 	{
-	case SAVE: saveToFile("Board.txt"); //TODO: save to file func-- use save to file of board
+	case SAVE: saveToFile("Board.txt"); 
 		break;
 	case DELETE: m_board(location) = GameObject(EMPTY);
 		break;
 
 	case NEWPAGE: m_board = Board(m_board.getHeigth(), m_board.getWidth());
 		break;
-	case ROBOT:
-	case DOOR:				
-		moveOnce(m_current, location);
-	default: 
+	default: //TODO: add special beavior for ROBOT and DOOR 
 		m_board(location) = m_current;
 		break;
 	}

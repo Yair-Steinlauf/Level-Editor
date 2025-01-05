@@ -30,14 +30,3 @@ private:
         "ROBOT", "GUARD", "DOOR", "WALL", "ROCK", "EMPTY", "DELETE", "SAVE", "NEWPAGE"
     };
 };
-
-
-//class DataLoader {
-//public:
-//	DataLoader();
-//	static sf::Texture* getP2Texture(enum ObjectType type);
-//private:
-//	static inline std::vector <sf::Texture> m_textures;
-//	static inline std::vector<std::string> m_objectNames = { "ROBOT" ,"GUARD", "DOOR",
-//											   "WALL","ROCK", "EMPTY" };
-//};
