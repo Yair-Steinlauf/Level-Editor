@@ -3,7 +3,7 @@
 
 Controller::Controller()
 	:m_board(loadFromFile("Board.txt")), 
-	m_menu()
+	m_menu(),m_current(EMPTY)
 {}
 
 void Controller::run()
@@ -36,17 +36,32 @@ void Controller::run()
 				switch (event.mouseButton.button)
 				{
 				case sf::Mouse::Button::Left:
-					m_board(location) = GameObject(GUARD);
+					handelClick(location);
 					break;
-			//		//case sf::Mouse::Button::Right:
-			//		//    handleClick(location);
-			//		//    break;
 				}
-
-			//	break;
 			}
 			}
 		}
+	}
+}
+
+void Controller::handelClick(sf::Vector2f location)
+{
+	if (location.y < menuHeight)
+	{
+		m_current = m_menu(location);
+	}
+	switch (m_current.getObjectType())
+	{
+	case SAVE: //TODO: save to file func-- use save to file of board
+		break;
+	case DELETE: m_board(location) = GameObject(EMPTY);
+		break;
+	case NEWPAGE: // TODO: m_board.setToDefualt()
+		break;
+	default: //TODO: add special beavior for ROBOT and DOOR 
+		m_board(location) = m_current;
+		break;
 	}
 }
 
