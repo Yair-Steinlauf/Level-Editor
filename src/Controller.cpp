@@ -4,7 +4,10 @@
 Controller::Controller()
 	:m_board(loadFromFile("Board.txt")), 
 	m_menu(),m_current(EMPTY)
-{}
+{
+	m_doorLocation = sf::Vector2f(0, 0);
+	m_robotLocation = sf::Vector2f(0, 0);
+}
 
 void Controller::run()
 {
@@ -60,11 +63,43 @@ void Controller::handelClick(sf::Vector2f location)
 
 	case NEWPAGE: m_board = Board(m_board.getHeigth(), m_board.getWidth());
 		break;
-	default: //TODO: add special beavior for ROBOT and DOOR 
+	case ROBOT:
+	case DOOR:				
+		moveOnce(m_current, location);
+	default: 
 		m_board(location) = m_current;
 		break;
 	}
 }
+
+void Controller::moveOnce(GameObject gameObj, sf::Vector2f loc)
+{
+	if (gameObj.getObjectType() == ROBOT) {
+		if (m_robotLocation == sf::Vector2f(0, 0)) {
+			m_board(loc) = m_current;
+			m_robotLocation = loc;
+		}
+		else {
+			m_board(m_robotLocation) = GameObject(EMPTY);
+			m_board(loc) = m_current;
+			m_robotLocation = loc;
+		}
+	}
+	else{
+		if (m_doorLocation == sf::Vector2f(0, 0)) {
+			m_board(loc) = m_current;
+			m_doorLocation = loc;
+		}
+		else {
+			m_board(m_doorLocation) = GameObject(EMPTY);
+			m_board(loc) = m_current;
+			m_doorLocation = loc;
+		}
+	}
+}
+
+
+
 
 
 void Controller::saveToFile(std::string fileName)
@@ -75,6 +110,8 @@ void Controller::saveToFile(std::string fileName)
 		m_board.saveToFile(outPut);
 	}
 }
+
+
 
 Board Controller::loadFromFile(std::string fileName)
 {

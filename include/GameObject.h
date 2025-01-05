@@ -10,6 +10,6 @@ public:
 	bool contain(sf::Vector2f coords, sf::Vector2f& location, sf::Vector2f& size);
 
 private:
-	sf::Texture* m_texture;
+	sf::Texture* m_texture;	
 	enum ObjectType m_type;
 };
