@@ -27,7 +27,7 @@ private:
     // Store textures using unique_ptr to manage memory
     static inline std::vector<std::unique_ptr<sf::Texture>> m_textures;
     static inline const std::vector<std::string> m_objectNames = {
-        "ROBOT", "GUARD", "DOOR", "WALL", "ROCK", "EMPTY"
+        "ROBOT", "GUARD", "DOOR", "WALL", "ROCK", "EMPTY", "DELETE", "SAVE", "NEWPAGE"
     };
 };
 

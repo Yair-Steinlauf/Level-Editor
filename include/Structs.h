@@ -1,12 +1,20 @@
 #pragma once
 
+#define windowWidth 1280
+#define windowHeight 740
+#define menuHeight 120
+#define matHeight 130
+
 enum ObjectType{
 	ROBOT = '/',
 	GUARD = '!',
 	DOOR  =	'D',
 	WALL  = '#',
 	ROCK  = '@',
-	EMPTY = ' '
+	EMPTY = ' ',
+	DELETE = 6,
+	SAVE = 7,
+	NEWPAGE  = 8
 };
 
 enum TextureType {
@@ -15,7 +23,10 @@ enum TextureType {
 	TDOOR,
 	TWALL,
 	TROCK,
-	TEMPTY 
+	TEMPTY,
+	TDELETE,
+	TSAVE,
+	TNEWPAGE
 };
 
 

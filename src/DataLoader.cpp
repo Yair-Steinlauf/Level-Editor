@@ -1,17 +1,5 @@
 #include "DataLoader.h"
 
-
-
-//sf::Texture* DataLoader::getP2Texture(ObjectType type) {
-//    auto& instance = getInstance(); // Ensure initialization
-//
-//    if (type < 0 || type >= m_textures.size()) {
-//        return nullptr; // Error handling
-//    }
-//
-//    return m_textures[type].get();
-//}
-
 DataLoader::DataLoader() {
     // Reserve space to prevent reallocations
     m_textures.reserve(m_objectNames.size());
@@ -43,15 +31,11 @@ sf::Texture* DataLoader::getP2Texture(enum ObjectType type)
 		break;
 	case EMPTY:return m_textures[TextureType::TEMPTY].get();
 		break;
+	case DELETE:return m_textures[TextureType::TDELETE].get();
+		break;
+	case SAVE:return m_textures[TextureType::TSAVE].get();
+		break;
+	case NEWPAGE:return m_textures[TextureType::TNEWPAGE].get();
+		break;
 	}
 }
-//
-//void DataLoader::initDataLoader()
-//{
-//	for (const auto& objectName : m_objectNames)
-//	{
-//		auto texture = sf::Texture();
-//		texture.loadFromFile(objectName + ".png");
-//		m_textures.push_back(texture);
-//	}
-//}

@@ -6,11 +6,7 @@
 #include "SFML/Graphics.hpp"
 #include "GameObject.h"
 #include "DataLoader.h"
-
-#define windowWidth 1280
-#define windowHeight 740
-#define menuHeight 120
-#define matHeight 130
+//TODO: get tile from coords function
 
 class Board {
 public:
@@ -21,6 +17,7 @@ public:
 	void createGameObject(int row, int col, enum ObjectType type);
 	void saveToFile(std::ofstream file);
 	GameObject& operator()(int row, int col);
+	GameObject& operator()(sf::Vector2f coords);
 	void draw(sf::RenderWindow& window);
 private:
 	std::vector<std::string>& fileToString(std::ifstream& fileName);
