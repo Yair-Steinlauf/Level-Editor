@@ -34,7 +34,7 @@ void Board::saveToFile(std::ofstream& out)
     {
         for (int colIndex = 0; colIndex < getWidth(); colIndex++)
         {
-            out << m_board[rowIndex][colIndex].getObjectType();
+            out <<(char) m_board[rowIndex][colIndex].getObjectType();
         }
         out << std::endl;
     }
@@ -62,14 +62,7 @@ void Board::loadGameObjectVector(std::vector<std::string>& str)
         m_board.push_back(line);
     }
 }
-ObjectType Board::gameObject2ObjectType(GameObject& object)
-{
-    return object.getObjectType();
-}
-GameObject Board::objectType2GameObject(ObjectType type)
-{
-    return GameObject(type);
-}
+
 GameObject& Board::operator()(int row, int col)
 {
 

@@ -6,7 +6,6 @@
 #include "SFML/Graphics.hpp"
 #include "GameObject.h"
 #include "DataLoader.h"
-//TODO: get tile from coords function
 
 class Board {
 public:
@@ -22,8 +21,7 @@ public:
 private:
 	std::vector<std::string>& fileToString(std::ifstream& fileName);
 	void loadGameObjectVector(std::vector<std::string>& str);
-	ObjectType gameObject2ObjectType(GameObject& object);
-	GameObject objectType2GameObject(enum ObjectType type);
+
 	std::vector<std::vector<GameObject>> m_board;
 	std::vector<std::vector<GameObject>> defualtBoard(int Height, int Width);
 
