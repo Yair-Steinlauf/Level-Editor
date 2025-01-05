@@ -1,0 +1,7 @@
+﻿
+configure_file ("WALL.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("ROBOT.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("DOOR.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("GUARD.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("ROCK.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("EMPTY.png" ${CMAKE_BINARY_DIR} COPYONLY)
