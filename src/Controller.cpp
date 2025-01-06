@@ -115,13 +115,13 @@ void Controller::saveToFile(std::string fileName)
 
 Board Controller::loadFromFile(std::string fileName)
 {
-	auto file = std::ifstream (fileName);
-	if (!file)
+	std::ifstream file(fileName);
+	if (file.is_open())
 	{
-		return newBoard();
+		return Board(file);
 	}
 	else
-		return Board(file);
+		return newBoard();
 }
 
 Board Controller::newBoard()

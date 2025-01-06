@@ -19,7 +19,7 @@ public:
 	GameObject& operator()(sf::Vector2f coords);
 	void draw(sf::RenderWindow& window);
 private:
-	std::vector<std::string>& fileToString(std::ifstream& fileName);
+	std::vector<std::string> fileToString(std::ifstream& fileName);
 	void loadGameObjectVector(std::vector<std::string>& str);
 
 	std::vector<std::vector<GameObject>> m_board;

@@ -40,7 +40,7 @@ void Board::saveToFile(std::ofstream& out)
     }
 }
 
-std::vector<std::string>& Board::fileToString(std::ifstream& file)
+std::vector<std::string> Board::fileToString(std::ifstream& file)
 {
     std::string line;
     std::vector<std::string> board;
