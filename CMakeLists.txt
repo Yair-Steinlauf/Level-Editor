@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.26)
 
 project (SFMLExamples)
 set (COURSE_EXAMPLE ON)
-set (MY_AUTHORS "")
+set (MY_AUTHORS "Yair_Steinluaf-Gilad_Shtruzman")
 
 include (cmake/CompilerSettings.cmake)
 

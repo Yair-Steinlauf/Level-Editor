@@ -53,28 +53,33 @@ void Controller::handelClick(sf::Vector2f location)
 	if (location.y < menuHeight)
 	{
 		m_current = m_menu(location);
+		switch (m_current.getObjectType())
+			{
+			case SAVE: saveToFile("Board.txt");
+				break;
+			case NEWPAGE:
+				m_board = newBoard();
+				m_current = GameObject(EMPTY);
+				break;
+			case DELETE: m_current = GameObject(EMPTY);
+				break;
+		}
 	}
-	switch (m_current.getObjectType())
-	{
-	case SAVE: saveToFile("Board.txt"); 
-		break;
-	case DELETE: m_board(location) = GameObject(EMPTY);
-		break;
-
-	case NEWPAGE: m_board  = newBoard();
-		break;
-	case  ROBOT:
-		handleUniqueObject(location, ROBOT);
-		//moveOnce(m_board(location), location);
-		break;
-	case  DOOR:
-		handleUniqueObject(location, DOOR);
-		//moveOnce(m_board(location), location);
-		break;
-	default:
-		m_board(location) = m_current;
-		break;
-	}
+	else
+	{ 
+		switch (m_current.getObjectType())
+		{
+			case  ROBOT:
+				handleUniqueObject(location, ROBOT);
+				break;
+			case  DOOR:
+				handleUniqueObject(location, DOOR);
+				break;
+			default:
+				m_board(location) = m_current;
+				break;
+			}
+		}
 }
 
 void Controller::handleUniqueObject(sf::Vector2f newLocation, ObjectType type)
