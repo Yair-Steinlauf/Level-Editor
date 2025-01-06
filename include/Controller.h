@@ -11,12 +11,15 @@ public:
 	void run();
 private:
 	void handelClick(sf::Vector2f location);
+	void handleUniqueObject(sf::Vector2f newLocation, ObjectType type);
 	void saveToFile(std::string fileName);
-	void moveOnce(GameObject gameObj, sf::Vector2f loc);
 	Board loadFromFile(std::string fileName);
+	Board newBoard();
 	Board m_board;
 	Menu m_menu;
 	GameObject m_current;
+	sf::Vector2f m_doorLocation = sf::Vector2f(0, 0);
+	sf::Vector2f m_robotLocation = sf::Vector2f(0, 0);
 
 
 };

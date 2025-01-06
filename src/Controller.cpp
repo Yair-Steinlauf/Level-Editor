@@ -61,41 +61,39 @@ void Controller::handelClick(sf::Vector2f location)
 	case DELETE: m_board(location) = GameObject(EMPTY);
 		break;
 
-	case NEWPAGE: m_board = Board(m_board.getHeigth(), m_board.getWidth());
+	case NEWPAGE: m_board  = newBoard();
 		break;
-	default: //TODO: add special beavior for ROBOT and DOOR 
+	case  ROBOT:
+		handleUniqueObject(location, ROBOT);
+		//moveOnce(m_board(location), location);
+		break;
+	case  DOOR:
+		handleUniqueObject(location, DOOR);
+		//moveOnce(m_board(location), location);
+		break;
+	default:
 		m_board(location) = m_current;
 		break;
 	}
 }
 
-void Controller::moveOnce(GameObject gameObj, sf::Vector2f loc)
+void Controller::handleUniqueObject(sf::Vector2f newLocation, ObjectType type)
 {
-	if (gameObj.getObjectType() == ROBOT) {
-		if (m_robotLocation == sf::Vector2f(0, 0)) {
-			m_board(loc) = m_current;
-			m_robotLocation = loc;
-		}
-		else {
-			m_board(m_robotLocation) = GameObject(EMPTY);
-			m_board(loc) = m_current;
-			m_robotLocation = loc;
-		}
+	// Check if we're handling robot or door
+	sf::Vector2f& currentLocation = (type == ROBOT) ? m_robotLocation : m_doorLocation;
+
+	// If there's already an object of this type on the board
+	if (currentLocation != sf::Vector2f(0, 0) &&
+		m_board(currentLocation).getObjectType() == type)
+	{
+		// Remove the old object
+		m_board(currentLocation) = GameObject(EMPTY);
 	}
-	else{
-		if (m_doorLocation == sf::Vector2f(0, 0)) {
-			m_board(loc) = m_current;
-			m_doorLocation = loc;
-		}
-		else {
-			m_board(m_doorLocation) = GameObject(EMPTY);
-			m_board(loc) = m_current;
-			m_doorLocation = loc;
-		}
-	}
+
+	// Place the new object and update its location
+	m_board(newLocation) = GameObject(type);
+	currentLocation = newLocation;
 }
-
-
 
 
 
@@ -115,13 +113,18 @@ Board Controller::loadFromFile(std::string fileName)
 	auto file = std::ifstream (fileName);
 	if (!file)
 	{
+		return newBoard();
+	}
+	else
+		return Board(file);
+}
+
+Board Controller::newBoard()
+{
 		std::cout << "enter heigth & width\n";
 		int heigth, width;
 		std::cin >> heigth >> width;
 		return Board(heigth, width);
-	}
-	else
-		return Board(file);
 }
 
 
