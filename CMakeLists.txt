@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.26)
 
-project (SFMLExamples)
+project (LevelEditor)
 set (COURSE_EXAMPLE ON)
 set (MY_AUTHORS "Yair_Steinluaf-Gilad_Shtruzman")
 

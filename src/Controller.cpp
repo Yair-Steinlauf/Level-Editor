@@ -5,10 +5,23 @@ Controller::Controller()
 	:m_board(loadFromFile("Board.txt")), 
 	m_menu(),m_current(EMPTY)
 {
-	m_doorLocation = sf::Vector2f(0, 0);
-	m_robotLocation = sf::Vector2f(0, 0);
+
+	m_doorLocation = findObject(DOOR);
+	m_robotLocation = findObject(ROBOT);
 }
 
+sf::Vector2f Controller::findObject(ObjectType type)
+{
+	for (int row = 0; row < m_board.getHeigth(); row++)
+	{
+		for (int col = 0; col < m_board.getWidth(); col++)
+		{
+			if (m_board(row, col).getObjectType() == type)
+				return m_board.getCoords(row, col);
+		}
+	}
+	return sf::Vector2f(0, 0);
+}
 void Controller::run()
 {
 
@@ -91,11 +104,11 @@ void Controller::handleUniqueObject(sf::Vector2f newLocation, ObjectType type)
 	if (currentLocation != sf::Vector2f(0, 0) &&
 		m_board(currentLocation).getObjectType() == type)
 	{
-		// Remove the old object
+		
 		m_board(currentLocation) = GameObject(EMPTY);
 	}
 
-	// Place the new object and update its location
+
 	m_board(newLocation) = GameObject(type);
 	currentLocation = newLocation;
 }

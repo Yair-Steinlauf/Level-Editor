@@ -17,6 +17,7 @@ public:
 	void saveToFile(std::ofstream& file);
 	GameObject& operator()(int row, int col);
 	GameObject& operator()(sf::Vector2f coords);
+	sf::Vector2f getCoords(int row, int col);
 	void draw(sf::RenderWindow& window);
 private:
 	std::vector<std::string> fileToString(std::ifstream& fileName);

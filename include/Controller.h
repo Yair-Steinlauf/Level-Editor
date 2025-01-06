@@ -8,6 +8,7 @@
 class Controller {
 public:
 	Controller();
+	sf::Vector2f findObject(ObjectType type);
 	void run();
 private:
 	void handelClick(sf::Vector2f location);

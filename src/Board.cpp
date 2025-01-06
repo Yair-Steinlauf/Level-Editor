@@ -96,10 +96,16 @@ GameObject& Board::operator()(sf::Vector2f coords)
     
 }
 
-void Board::draw(sf::RenderWindow& window)
+sf::Vector2f Board::getCoords(int row, int col)
 {
     float tileSize = (windowHeight - menuHeight - this->getHeigth()) / std::max(this->getHeigth(), this->getWidth());
     float startPoint = (windowWidth - this->getWidth() * (tileSize + 1)) / 2;
+    auto location = sf::Vector2f(float(col * (tileSize + 1) + startPoint), float(row * (tileSize + 1) + matHeight));
+    return location;
+
+}
+void Board::draw(sf::RenderWindow& window)
+{
     float scale = 2.5f / std::max(this->getWidth(), this->getHeigth());
 
     for (int row = 0; row < m_board.size(); row++)
@@ -107,10 +113,10 @@ void Board::draw(sf::RenderWindow& window)
         for (int col = 0; col < m_board[row].size(); col++)
         {
             auto size = sf::Vector2f(scale, scale);
-            auto location = sf::Vector2f(float(col * (tileSize + 1) + startPoint), float(row * (tileSize + 1) + matHeight));
+            sf::Vector2f location = getCoords(row, col);
             m_board[row][col].draw(window, location, size);
         }
-    }
+    }    
 }
 
 std::vector<std::vector<GameObject>> Board::defualtBoard(int Height, int Width)
