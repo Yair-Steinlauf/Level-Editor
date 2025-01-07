@@ -1,6 +1,5 @@
 #include "Board.h"  
 
-
 Board::Board(int Height, int Width)
 {
     m_board = defualtBoard(Height, Width);
@@ -28,7 +27,7 @@ void Board::createGameObject(int row, int col, enum ObjectType type)
     m_board[row][col] = GameObject(type);
 }
 
-void Board::saveToFile(std::ofstream& out)
+void Board::saveToFile(std::ofstream& out)const
 {
     for (int rowIndex = 0; rowIndex < getHeigth(); rowIndex++)
     {
@@ -40,7 +39,7 @@ void Board::saveToFile(std::ofstream& out)
     }
 }
 
-std::vector<std::string> Board::fileToString(std::ifstream& file)
+std::vector<std::string> Board::fileToString(std::ifstream& file)const
 {
     std::string line;
     std::vector<std::string> board;
@@ -50,7 +49,7 @@ std::vector<std::string> Board::fileToString(std::ifstream& file)
     file.close();
     return board;
 }
-void Board::loadGameObjectVector(std::vector<std::string>& str)
+void Board::loadGameObjectVector(const std::vector<std::string>& str)
 {
     for (int row = 0; row < str.size(); row++)
     {
@@ -65,15 +64,28 @@ void Board::loadGameObjectVector(std::vector<std::string>& str)
 
 GameObject& Board::operator()(int row, int col)
 {
-
-
-	if (row < m_board.size() && col < m_board[row].size())
+	if (row >= 0 && row < getHeigth() && col >= 0 && col < getWidth())
 	{
 		return m_board[row][col];
 	}
+
+    return defaultObj;
+
 }
 
-GameObject& Board::operator()(sf::Vector2f coords)
+
+
+const GameObject& Board::operator()(int row, int col) const
+{
+    if (row >= 0 && row < getHeigth() && col >= 0 && col < getWidth())
+    {
+        return m_board[row][col];
+    }
+    return defaultObj;
+
+}
+
+GameObject& Board::operator()(const sf::Vector2f& coords)
 {
 
         float tileSize = (windowHeight - menuHeight - this->getHeigth()) / std::max(this->getHeigth(), this->getWidth());
@@ -83,20 +95,11 @@ GameObject& Board::operator()(sf::Vector2f coords)
         int row = static_cast<int>((coords.y - matHeight) / (tileSize + 1));
         int col = static_cast<int>((coords.x - startPoint) / (tileSize + 1));
 
-        // Check bounds and return the GameObject
-        if (row >= 0 && row < m_board.size() && col >= 0 && col < m_board[row].size())
-        {
-            return m_board[row][col];
-        }
+        return operator()(row,col);
 
-        // Handle out of bounds - you might want to throw an exception here
-        // or return a reference to a default GameObject
-        static GameObject defaultObj(EMPTY);
-        return defaultObj;
-    
 }
 
-sf::Vector2f Board::getCoords(int row, int col)
+sf::Vector2f Board::getCoords(int row, int col)const
 {
     float tileSize = (windowHeight - menuHeight - this->getHeigth()) / std::max(this->getHeigth(), this->getWidth());
     float startPoint = (windowWidth - this->getWidth() * (tileSize + 1)) / 2;
@@ -104,7 +107,7 @@ sf::Vector2f Board::getCoords(int row, int col)
     return location;
 
 }
-void Board::draw(sf::RenderWindow& window)
+void Board::draw(sf::RenderWindow& window)const
 {
     float scale = 2.5f / std::max(this->getWidth(), this->getHeigth());
 

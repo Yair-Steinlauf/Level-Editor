@@ -28,5 +28,3 @@ enum TextureType {
 	TSAVE,
 	TNEWPAGE
 };
-
-

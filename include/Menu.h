@@ -12,9 +12,9 @@ public:
 	void draw(sf::RenderWindow& window);
 	int getHeight() const;
 	int getWidth() const;
-	GameObject operator()(sf::Vector2f coords);
+	GameObject operator()(const sf::Vector2f coords)const;
 private:
-	std::string loadFromFile(std::string fileName);
+	std::string loadFromFile(const std::string fileName);
 	std::vector<GameObject> m_buttoms;
 
 };

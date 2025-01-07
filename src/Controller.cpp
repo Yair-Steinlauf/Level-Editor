@@ -10,7 +10,7 @@ Controller::Controller()
 	m_robotLocation = findObject(ROBOT);
 }
 
-sf::Vector2f Controller::findObject(ObjectType type)
+sf::Vector2f Controller::findObject(const ObjectType type)const
 {
 	for (int row = 0; row < m_board.getHeigth(); row++)
 	{
@@ -61,7 +61,7 @@ void Controller::run()
 	}
 }
 
-void Controller::handelClick(sf::Vector2f location)
+void Controller::handelClick(const sf::Vector2f location)
 {
 	if (location.y < menuHeight)
 	{
@@ -69,6 +69,7 @@ void Controller::handelClick(sf::Vector2f location)
 		switch (m_current.getObjectType())
 			{
 			case SAVE: saveToFile("Board.txt");
+				m_current = GameObject(EMPTY);
 				break;
 			case NEWPAGE:
 				m_board = newBoard();
@@ -95,7 +96,7 @@ void Controller::handelClick(sf::Vector2f location)
 		}
 }
 
-void Controller::handleUniqueObject(sf::Vector2f newLocation, ObjectType type)
+void Controller::handleUniqueObject(const sf::Vector2f newLocation, const  ObjectType type)
 {
 	// Check if we're handling robot or door
 	sf::Vector2f& currentLocation = (type == ROBOT) ? m_robotLocation : m_doorLocation;
@@ -108,14 +109,13 @@ void Controller::handleUniqueObject(sf::Vector2f newLocation, ObjectType type)
 		m_board(currentLocation) = GameObject(EMPTY);
 	}
 
-
 	m_board(newLocation) = GameObject(type);
 	currentLocation = newLocation;
 }
 
 
 
-void Controller::saveToFile(std::string fileName)
+void Controller::saveToFile(const std::string fileName) const
 {
 	auto outPut = std::ofstream(fileName);
 	if (outPut.is_open())

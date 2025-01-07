@@ -8,12 +8,12 @@
 class Controller {
 public:
 	Controller();
-	sf::Vector2f findObject(ObjectType type);
+	sf::Vector2f findObject(const ObjectType type)const;
 	void run();
 private:
 	void handelClick(sf::Vector2f location);
 	void handleUniqueObject(sf::Vector2f newLocation, ObjectType type);
-	void saveToFile(std::string fileName);
+	void saveToFile(const std::string fileName)const;
 	Board loadFromFile(std::string fileName);
 	Board newBoard();
 	Board m_board;

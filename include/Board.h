@@ -14,18 +14,19 @@ public:
 	int getHeigth() const;
 	int getWidth() const;
 	void createGameObject(int row, int col, enum ObjectType type);
-	void saveToFile(std::ofstream& file);
+	void saveToFile(std::ofstream& file) const;
 	GameObject& operator()(int row, int col);
-	GameObject& operator()(sf::Vector2f coords);
-	sf::Vector2f getCoords(int row, int col);
-	void draw(sf::RenderWindow& window);
+	const GameObject& operator()(int row, int col) const;
+	GameObject& operator()(const  sf::Vector2f& coords);
+	sf::Vector2f getCoords(int row, int col)const;
+	void draw(sf::RenderWindow& window)const;
 private:
-	std::vector<std::string> fileToString(std::ifstream& fileName);
-	void loadGameObjectVector(std::vector<std::string>& str);
+	std::vector<std::string> fileToString(std::ifstream& fileName)const;
+	void loadGameObjectVector(const std::vector<std::string>& str);
+	std::vector<std::vector<GameObject>> defualtBoard(int Height, int Width) ;
 
 	std::vector<std::vector<GameObject>> m_board;
-	std::vector<std::vector<GameObject>> defualtBoard(int Height, int Width);
-
-
 
 };
+
+static GameObject defaultObj(EMPTY);

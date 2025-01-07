@@ -1,5 +1,7 @@
 #include "DataLoader.h"
 
+
+
 DataLoader::DataLoader() {
     // Reserve space to prevent reallocations
     m_textures.reserve(m_objectNames.size());

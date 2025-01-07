@@ -18,7 +18,7 @@ public:
     }
 
     // Get texture by type
-    static sf::Texture* getP2Texture(ObjectType type);
+    static sf::Texture* getP2Texture(enum ObjectType type);
 
 private:
     // Private constructor for singleton

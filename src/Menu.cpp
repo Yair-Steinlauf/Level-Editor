@@ -50,7 +50,7 @@ std::string Menu::loadFromFile(std::string fileName)
 	return line;
 }
 
-GameObject Menu::operator()(sf::Vector2f coords) {
+GameObject Menu::operator()(const  sf::Vector2f coords) const {
 	// Constants should ideally be class members or configuration parameters
 	const float tileSize = (windowHeight - this->getHeight()) /
 		std::max(this->getHeight(), this->getWidth());

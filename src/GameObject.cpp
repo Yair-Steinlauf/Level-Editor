@@ -6,7 +6,7 @@ GameObject::GameObject(enum ObjectType type)
 	m_texture = DataLoader::getP2Texture(type);
 }
 
-void GameObject::draw(sf::RenderWindow& window, sf::Vector2f& location, sf::Vector2f& size)
+void GameObject::draw(sf::RenderWindow& window, sf::Vector2f& location, sf::Vector2f& size)const
 {
 	auto sprite = sf::Sprite();
 	sprite.setPosition(location);
@@ -15,7 +15,7 @@ void GameObject::draw(sf::RenderWindow& window, sf::Vector2f& location, sf::Vect
 	window.draw(sprite);
 }
 
-ObjectType GameObject::getObjectType()
+ObjectType GameObject::getObjectType()const
 {
 	return m_type;
 }
